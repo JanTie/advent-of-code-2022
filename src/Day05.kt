@@ -44,9 +44,9 @@ fun main() {
 
     fun part2(input: List<String>): String {
         return executeInstructions(input) { map, amount, from, to ->
-                val chars: List<Char> = map[from]!!.takeLast(amount)
-                map[from] = map[from]!!.dropLast(amount)
-                map[to] = map[to]!! + chars
+            val chars: List<Char> = map[from]!!.takeLast(amount)
+            map[from] = map[from]!!.dropLast(amount)
+            map[to] = map[to]!! + chars
         }
             .map { it.value.last() }
             .joinToString("")

@@ -1,20 +1,20 @@
 data class Tree(
-        val height: Int,
-        val allToTheLeft: List<Int>,
-        val allToTheTop: List<Int>,
-        val allToTheRight: List<Int>,
-        val allToTheBottom: List<Int>,
+    val height: Int,
+    val allToTheLeft: List<Int>,
+    val allToTheTop: List<Int>,
+    val allToTheRight: List<Int>,
+    val allToTheBottom: List<Int>,
 ) {
     val isVisible: Boolean
         get() = listOf(allToTheLeft, allToTheTop, allToTheRight, allToTheBottom)
-                .any { direction -> direction.all { it < height } || direction.isEmpty() }
+            .any { direction -> direction.all { it < height } || direction.isEmpty() }
 
     val scenicScore: Int
         get() = listOf(allToTheLeft, allToTheTop, allToTheRight, allToTheBottom)
-                .map { direction ->
-                    direction.indexOfFirst { it >= height }.takeIf { it != -1 }?.let { it + 1 } ?: direction.size
-                }
-                .fold(1) { currentScore, direction -> currentScore * direction }
+            .map { direction ->
+                direction.indexOfFirst { it >= height }.takeIf { it != -1 }?.let { it + 1 } ?: direction.size
+            }
+            .fold(1) { currentScore, direction -> currentScore * direction }
 }
 
 fun main() {
@@ -28,11 +28,11 @@ fun main() {
         return (0 until mapWidth).map { x ->
             (0 until mapHeight).map { y ->
                 Tree(
-                        map[y][x],
-                        allToTheLeft = (0 until x).reversed().map { readX -> map[y][readX] },
-                        allToTheRight = (x + 1 until mapWidth).map { readX -> map[y][readX] },
-                        allToTheTop = (0 until y).reversed().map { readY -> map[readY][x] },
-                        allToTheBottom = (y + 1 until mapHeight).map { readY -> map[readY][x] },
+                    map[y][x],
+                    allToTheLeft = (0 until x).reversed().map { readX -> map[y][readX] },
+                    allToTheRight = (x + 1 until mapWidth).map { readX -> map[y][readX] },
+                    allToTheTop = (0 until y).reversed().map { readY -> map[readY][x] },
+                    allToTheBottom = (y + 1 until mapHeight).map { readY -> map[readY][x] },
                 )
             }
         }.flatten()

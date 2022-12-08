@@ -9,14 +9,16 @@ fun main() {
                     currentDir = when {
                         param.startsWith("/") -> param
                         param.startsWith("..") -> currentDir.substring(0, currentDir.lastIndexOf("/"))
-                        else -> ("$currentDir/$param").replace("//","/")
+                        else -> ("$currentDir/$param").replace("//", "/")
                     }
                 }
+
                 it.startsWith("\$ ls") -> {
                     if (!map.containsKey(currentDir)) {
                         map[currentDir] = 0
                     }
                 }
+
                 it.startsWith("dir") -> Unit // no-op
                 else -> {
                     val (size) = it.split(" ")
@@ -30,12 +32,12 @@ fun main() {
     fun part1(input: List<String>): Int {
         val map = buildFileTree(input)
         return map.keys.map { key -> map.filter { it.key.startsWith(key) }.values.sum() }
-                .filter { it < 100000 }
-                .sum()
+            .filter { it < 100000 }
+            .sum()
     }
 
     fun part2(input: List<String>): Int {
-        val totalSize =  70000000
+        val totalSize = 70000000
         val updateSize = 30000000
         val map = buildFileTree(input)
         val sizes = map.keys.associateWith { key -> map.filter { it.key.startsWith(key) }.values.sum() }

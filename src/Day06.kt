@@ -1,7 +1,9 @@
 fun main() {
     fun String.findMarkerIndex(length: Int) = this
-            .windowed(length)
-            .indexOfFirst { it.toList().distinct().size == length } + length // add length because we skipped length indices due to window
+        .windowed(length)
+        .indexOfFirst {
+            it.toList().distinct().size == length
+        } + length // add length because we skipped length indices due to window
 
     fun part1(input: List<String>): Int {
         return input[0].findMarkerIndex(4)

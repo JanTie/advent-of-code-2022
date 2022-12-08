@@ -20,7 +20,7 @@ fun main() {
                 .map { group -> group.map { rucksack -> rucksack.flatten() } } // list / group / rucksack / item
                 .map { group ->
                     group.flatten().distinct().first { group.all { rucksack -> rucksack.contains(it) } }
-            }
+                }
         }.sum()
     }
 
